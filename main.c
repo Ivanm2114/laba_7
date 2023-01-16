@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <Windows.h>
+#include <string.h>
 #include <stddef.h>
 #define lmax 200
 
@@ -28,7 +29,7 @@ int input_natural_int()
     {
         do
         {
-            printf("Введите натуральнео число\n");
+            printf("Введите натуральное число\n");
             x=scanf("%f",&temp);
             while (getchar()!='\n');
         }
@@ -61,20 +62,20 @@ float input_natural_float()
 
 
 void input_book(struct book *b){
-    puts("Название :\t\t");
+    printf("Название :  ");
     gets(b->title);
-    puts("Цена:\t\t");
+    printf("Цена:  ");
     b->price=input_natural_float();
-    puts("Автор :\t\t");
+    printf("Автор :   ");
     gets(b->author);
-    puts("Кол-во страниц :\t\t");
+    printf("Кол-во страниц :  ");
     b->pages = input_natural_int();
     puts("Издательство:");
-    puts("Год издания: \t\t");
+    printf("Год издания:   ");
     b->izdatelstvo.year=input_natural_int();
-    puts("Город:\t\t");
+    printf("Город:  ");
     gets(b->izdatelstvo.city);
-    puts("Название:\t\t");
+    printf("Название:  ");
     gets(b->izdatelstvo.name);
 
 }
@@ -82,37 +83,66 @@ void input_book(struct book *b){
 
 
 void output_book(struct book *b){
-    puts("Название :\t\t");
+    printf("Название :\t\t");
     puts(b->title);
-    puts("Цена:\t\t");
-    printf("%f\n", b->price);
-    puts("Автор :\t\t");
+    printf("Цена:\t\t\t");
+    printf("%.2f\n", b->price);
+    printf("Автор :\t\t\t");
     puts(b->author);
-    puts("Кол-во страниц :\t\t");
+    printf("Кол-во страниц :\t");
     printf("%d\n",b->pages);
     puts("Издательство:");
-    puts("Год издания: \t\t");
+    printf("Год издания: \t\t");
     printf("%d\n",b->izdatelstvo.year);
-    puts("Город:\t\t");
+    printf("Город:\t\t\t");
     puts(b->izdatelstvo.city);
-    puts("Название:\t\t");
+    printf("Название:\t\t");
     puts(b->izdatelstvo.name);
 
 }
 
 
+int function(struct book *a,int k, char b[lmax][lmax],char city[lmax], int year){
+    int count=0;
+    for(int i=0;i<k;i++){
+        if(strcmp(a[i].izdatelstvo.city,city)==0 && a[i].izdatelstvo.year>year){
+            strcpy(b[count++],a[i].title);
+        }
+    }
+    return count;
 
+
+}
 
 
 int main(){
     struct book A[lmax];
-    int k;
+    char titles[lmax][lmax];
+    int k,year, count;
+    char city[lmax];
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
     k=input_natural_int();
     for(int i=0;i<k;i++){
         input_book(&A[i]);
     }
-
+    puts("\n\n");
+    for(int i=0;i<k;i++){
+        output_book(&A[i]);
+        puts("\n");
+    }
+    puts("Введите город");
+    gets(city);
+    puts("Введите год");
+    year=input_natural_int();
+    count=function(A,k,titles,city,year);
+    if(count>0){
+        printf("Найдено %d книг(а)\n",count);
+    for(int i=0;i<count;i++){
+        puts(titles[i]);
+    }}
+    else{
+        printf("Книги не найдены");
+    }
     return 0;
 }
