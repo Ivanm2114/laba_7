@@ -75,6 +75,7 @@ void function_3(struct node *lst) {
         if (lst->info > 0) {
             first_positive = lst->next;
         }
+        lst=lst->next;
     }
     base = first_positive;
     while (base) {
@@ -91,6 +92,15 @@ void function_3(struct node *lst) {
     }
 }
 
+void free_memory(struct node* lst){
+    struct node *now=lst, *next=lst;
+    while(next) {
+        next=now->next;
+        free(now);
+        now=next;
+    }
+
+}
 int main() {
     struct node *lst, add;
     int a1, func_2;
@@ -103,7 +113,6 @@ int main() {
     a1 = input_A1();
     add.info = a1;
     func_2 = function_2(lst, &add);
-    printf("%d\n", func_2);
     if (func_2) {
         print_stack(lst);
         function_3(lst);
@@ -112,6 +121,7 @@ int main() {
         puts("Так как положительных нет задание 2 и 3 не может быть выполнено");
         print_stack(lst);
     }
+    free_memory(lst);
 
 
     return 0;
