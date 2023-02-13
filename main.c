@@ -62,20 +62,20 @@ float input_natural_float()
 
 
 void input_book(struct book *b){
-    printf("Название :");
+    printf("Название :  ");
     gets(b->title);
-    printf("Цена:");
+    printf("Цена:  ");
     b->price=input_natural_float();
-    printf("Автор :");
+    printf("Автор :   ");
     gets(b->author);
-    printf("Кол-во страниц :");
+    printf("Кол-во страниц :  ");
     b->pages = input_natural_int();
     puts("Издательство:");
-    printf("Год издания:");
+    printf("Год издания:   ");
     b->izdatelstvo.year=input_natural_int();
-    printf("Город:");
+    printf("Город:  ");
     gets(b->izdatelstvo.city);
-    printf("Название:");
+    printf("Название:  ");
     gets(b->izdatelstvo.name);
 
 }
@@ -92,11 +92,11 @@ void output_book(struct book *b){
     printf("Кол-во страниц :\t");
     printf("%d\n",b->pages);
     puts("Издательство:");
-    printf("    Год издания: \t");
+    printf("Год издания: \t\t");
     printf("%d\n",b->izdatelstvo.year);
-    printf("    Город:\t\t");
+    printf("Город:\t\t\t");
     puts(b->izdatelstvo.city);
-    printf("    Название:\t\t");
+    printf("Название:\t\t");
     puts(b->izdatelstvo.name);
 
 }
@@ -124,12 +124,10 @@ int main(){
     SetConsoleOutputCP(1251);
     k=input_natural_int();
     for(int i=0;i<k;i++){
-        printf("Книга %d\n",i+1);
         input_book(&A[i]);
     }
     puts("\n\n");
     for(int i=0;i<k;i++){
-        printf("Книга %d\n",i+1);
         output_book(&A[i]);
         puts("\n");
     }
@@ -139,8 +137,7 @@ int main(){
     year=input_natural_int();
     count=function(A,k,titles,city,year);
     if(count>0){
-        printf("Найдено %d книг(а) изданных(ая) после %d года и выпущенных(ая) в городе ",count, year);
-        puts(city);
+        printf("Найдено %d книг(а)\n",count);
     for(int i=0;i<count;i++){
         puts(titles[i]);
     }}
