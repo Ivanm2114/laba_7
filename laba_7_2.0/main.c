@@ -73,11 +73,11 @@ void function_3(struct node *lst) {
     int temp;
     while (lst && !first_positive) {
         if (lst->info > 0) {
-            first_positive = lst->next;
+            first_positive = lst;
         }
         lst=lst->next;
     }
-    base = first_positive;
+    base = first_positive->next;
     while (base) {
         comparing_to = base->next;
         while (comparing_to) {
